@@ -45,7 +45,7 @@ if (promtFight === "skip" || promtFight === "SKIP") {
    
    //check enemy's health
    if (enemyHealth <= 0) {
-//    window.alert(enemyName + " has died!");
+   window.alert(enemyName + " has died!");
    //award player money for winning
    playerMoney = playerMoney + 20;
    //leave while loop since enemy is dead
