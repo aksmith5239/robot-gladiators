@@ -4,7 +4,7 @@
 //      * Defeat each enemy robot
 // "LOSE"  - Player robot's health is 0 or less
 
-//player variables
+//player variables - global variables - can be used in any function
 var playerName = window.prompt("What is your Robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
@@ -70,8 +70,14 @@ if (promtFight === "skip" || promtFight === "SKIP") {
      }
  }
  
- //FIGHT LOOP
-//  var startGame = function() {
+ //FIGHT FOR LOOP
+ var startGame = function() {
+   //restart player stats
+   playerHealth = 100;
+   playerAttack = 10;
+   playerMoney = 10;
+
+   //other logic remains the same
     for (var i = 0; i < enemyNames.length; i++) {
       if (playerHealth > 0) {
         window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
@@ -83,6 +89,24 @@ if (promtFight === "skip" || promtFight === "SKIP") {
         window.alert("You have lost your robot in battle! Game Over!");
         break;
       }
-    };
+    }
+    //play again
+    endGame();
+  };
+var endGame = function() {
+  // if player is still alive
+  if (playerHealth > 0) {
+    window.alert("Great job, you have survived the game! You now have a score of " + playerMoney + ".");
+  } else {
+    window.alert("You have lost your robot in battle.");
+  }
+  var playAgainConfirm = window.confirm("Would you like to play again? ");
 
- 
+  if (playAgainConfirm) {
+    //restart the game
+    startGame();
+  } else {
+    window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+  }
+}
+ startGame();
