@@ -77,6 +77,7 @@ if (promtFight === "skip" || promtFight === "SKIP") {
     for (var i = 0; i < enemyInfo.length; i++) {
       if (playerInfo.health > 0) {
         window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+        debugger;
         var pickedEnemyObj = enemyInfo[i];
         pickedEnemyObj.health = randomNumber(40, 60);
 
@@ -134,7 +135,7 @@ switch (shopOptionPrompt) {
     //leave the store
   case "LEAVE":
   case "leave":
-    window.alert("Leaving the store. Thank you, come again soon.");
+    window.alert("Leaving the store. Thank you, play again soon!");
     //do nothing so function will end
   break;
 
@@ -151,9 +152,21 @@ var randomNumber = function(min, max){
   return value;
 }; //end random number function
 
+//player name function
+var getPlayerName = function() {
+  var name = "";
+  //add loop here with prompt and condition
+  while (name === "" || name === "null") {
+    name = prompt("What is your robot's name?");
+  } 
+  console.log("Your robot's name is " + name);
+  return name;
+
+} //end getPlayerName function
+
 //playerInfo object
 var playerInfo = {
-  name: window.prompt("What is your Robot's name?"),
+  name: getPlayerName(),
   health: 100, 
   attack: 10,
   money: 10,
