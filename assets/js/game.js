@@ -3,12 +3,38 @@
 //      * Fight all enemy robots
 //      * Defeat each enemy robot
 // "LOSE"  - Player robot's health is 0 or less
-//function to generate a random numeric value
 
 
 
-//Alert users that they are starting the round
-// window.alert("Welcome to Robot Gladiators!");
+
+//fight or skip function
+var fightOrSkip = function() {
+  var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.")
+if(promptFight === "" || promptFight === "null") {
+  window.alert("You must provide a valid answer. Please try again.");
+  return fightOrSkip();
+}
+//if user picks skip, confirm the skip and stop the loop
+promptFight = promptFight.toLowerCase();
+if (promptFight === "skip") {
+  //confirm the user wants to skip
+  var confirmSkip = window.confirm("Are you sure you want to skip this battle?");
+  // if player confirms skip - skip is true - leave the fight
+  if (confirmSkip) {
+    window.alert(playerInfo.name + " has chosen to skip this battle. Goodbye!");
+    //subtract money from player for skipping the battle
+    playerInfo.money =  Math.max(0, playerInfo.money - 10);
+  // return true if user wants to leave
+  
+    // return true if player wants to leave
+    return true;
+  
+    } // end confirm skip statement
+  
+  } // end promptFight if statement
+  return false;
+} //end fightOrSkip function
+
 
 //fight function
 var fight = function(enemy) {
@@ -16,22 +42,11 @@ var fight = function(enemy) {
 // fight function statements
  //repeat and execute as long as the enemy robot is alive
 while(enemy.health > 0 && playerInfo.health > 0) {
-    var promtFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-
-//If player chooses to fight, then FIGHT!
-if (promtFight === "skip" || promtFight === "SKIP") {
-    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-    //if yes (true), leave fight
-    if (confirmSkip) {
-        window.alert(playerInfo.name + " has chosen to skip the fight! Goodbye!");
-        //subtract money from playerInfo.money for skipping
-        playerInfo.money = Math.max(0, playerInfo.money - 10);
-        console.log("playerInfo.money", playerInfo.money)
-        break;
-    } 
-} 
+    if(fightOrSkip()) {
+      break;
+    }
     // remove enemy's health by subtracting the amount set in the player attack variable 
-   var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+  var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
    enemy.health = Math.max(0, enemy.health - damage);
    // Log a resulting message to the console so we know that it worked.
@@ -113,7 +128,7 @@ var endGame = function() {
     //restart the game
     startGame();
   } else {
-    window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+    window.alert("Thank you for playing Robot Gladiators! Play again soon!");
   }
 }; //end endGame function
 //begin shop function
@@ -145,6 +160,7 @@ switch (shopOptionPrompt) {
   break;
 }
 }; //end shop function
+//function to generate a random numeric value
 var randomNumber = function(min, max){
   var value = Math.floor(Math.random() * (max - min + 1) + min);
 
