@@ -147,21 +147,19 @@ var endGame = function() {
 //begin shop function
 var shop = function(){
 //ask the player what they would like to do
-var shopOptionPrompt =  window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL' , 'UPGRADE' , or 'LEAVE' to make a choice.");
+var shopOptionPrompt =  window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter 1 for 'REFILL', 2 for 'UPGRADE' , or 3 for 'LEAVE'.");
+shopOptionPrompt = parseInt(shopOptionPrompt);
 switch (shopOptionPrompt) {
   //refill case
-  case "REFILL":
-  case "refill":
+  case 1:
     playerInfo.refillHealth();
   break;
   //upgrade case
-  case "UPGRADE":  
-  case "upgrade":
+  case 2:
      playerInfo.upgradeAttack();
   break;
     //leave the store
-  case "LEAVE":
-  case "leave":
+    case 3:
     window.alert("Leaving the store. Thank you, come again soon.");
     //do nothing so function will end
   break;
