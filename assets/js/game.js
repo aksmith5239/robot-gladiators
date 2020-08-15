@@ -129,13 +129,26 @@ while(enemy.health > 0 && playerInfo.health > 0) {
   }; //end startGame funtion
   //begin endGame function
 var endGame = function() {
-  // if player is still alive
-  if (playerInfo.health > 0) {
-    window.alert("Great job, you have survived the game! You now have a score of " + playerInfo.money + ".");
-  } else {
-    window.alert("You have lost your robot in battle! Game Over!");
+
+
+  window.alert("The game has ended. Let's see how you did!");
+  //check local storage for high score
+  var highScore = localStorage.getItem("highscore");
+  if(highScore === "null") {
+    highScore = 0;
   }
-  var playAgainConfirm = window.confirm("Would you like to play again? ");
+  // if player has more money than the high score, player has new high score
+  if (playerInfo.money > highScore) {
+    localStorage.setItem("highScore" , playerInfo.money);
+    localStorage.setItem("name", playerInfo.name);
+
+    alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
+  } else {
+    alert(playerInfo.name + " did not beat the high score of " + highScore + ". Better luck next time!");
+  }
+
+//ask if player wants to play again
+var playAgainConfirm = window.confirm("Would you like to play again? ");
 
   if (playAgainConfirm) {
     //restart the game
@@ -143,7 +156,10 @@ var endGame = function() {
   } else {
     window.alert("Thank you for playing Robot Gladiators! Play again soon!");
   }
-}; //end endGame function
+
+};
+
+// }; //end endGame function
 //begin shop function
 var shop = function(){
 //ask the player what they would like to do
@@ -184,6 +200,7 @@ var playerInfo = {
   health: 100, 
   attack: 10,
   money: 10,
+  score: "x",
   reset: function(){
     this.health = 100;
     this.money = 10;
@@ -214,7 +231,7 @@ var playerInfo = {
 var enemyInfo = [ 
   {
     name: "Roborto",
-    attack: randomNumber(10, 14)
+    attack: randomNumber(10, 14),
 },
 {
   name: "Amy Android",
